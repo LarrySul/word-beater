@@ -40,7 +40,11 @@ function init(){
     wordInput.addEventListener('input', startMatch);
 
     // to call words api
-    fetch("https://api.datamuse.com/words?ml=ringing+in+the+ears&max=500")
+    fetch("https://api.datamuse.com/words?ml=ringing+in+the+ears&max=500", {
+        "Access-Control-Allow-Origin": "https://larrysul.github.io",
+        "Access-Control-Allow-Methods": "POST, PUT, GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    })
     .then(response =>{
         return response.json();
     }).then(res =>{
