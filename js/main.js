@@ -41,7 +41,7 @@ function init(){
 
     // to call words api
     fetch("https://api.datamuse.com/words?ml=ringing+in+the+ears&max=500", {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'https://api.datamuse.com/words?ml=ringing+in+the+ears&max=500',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
 
     })
