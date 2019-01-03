@@ -7,7 +7,8 @@ const message = document.querySelector('#message');
 const scoreDisplay = document.querySelector('#score');
 const timeDisplay = document.querySelector('#time');
 const seconds = document.querySelector('#seconds');
-
+// const levels = document.querySelector('#levels');
+// var currentLevel = levels.value;
 
     const levels = {
         easy: 5,
@@ -25,10 +26,14 @@ const seconds = document.querySelector('#seconds');
 
 
 // set array of words to an empty array
-const words = [];
+    const words = [];
+    
 
 // Initialize
 function init(){
+
+    // stage stage difficulty when they change
+    // levels.addEventListener('change', stageLevels);
     
     // Call countdown every second
     setInterval(countdown, 1000);
@@ -38,13 +43,21 @@ function init(){
 
     // Start matching on word input
     wordInput.addEventListener('input', startMatch);
+    
+    const uri = "https://api.datamuse.com/words?ml=ringing+in+the+ears&max=500";
+    let h = new Headers({
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    });
+
+    let req = new Request (uri, {
+        method: 'GET',
+        headers: h,
+        mode: 'cors'
+    });
 
     // to call words api
-    fetch("https://api.datamuse.com/words?ml=ringing+in+the+ears&max=500", {
-        "Access-Control-Allow-Origin": "https://larrysul.github.io",
-        "Access-Control-Allow-Methods": "POST, PUT, GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    })
+    fetch(req)
     .then(response =>{
         return response.json();
     }).then(res =>{
@@ -54,6 +67,17 @@ function init(){
         // load word from the set array
         showWord(words);
     })
+
+    // register sw
+    if('serviceWorker' in navigator){
+        navigator.serviceWorker.register('js/sw.js', {scope: 'js/'})
+        .then(registeration => {
+            console.log('SW registered', registeration);
+        })
+        .catch(err => {
+            console.log('SW failed to register', err)
+        })
+    }
 
 }
 
@@ -115,3 +139,13 @@ function checkStatus (){
         score = -1;
     }
 }
+
+// function to activate stage change
+// function stageLevels (){
+    // Available levels
+    //  currentLevel = time;
+    // var currentLevel = levels.value;
+    // time = currentLevel;
+    // alert(currentLevel);
+    // alert(currentLevel);
+// }
