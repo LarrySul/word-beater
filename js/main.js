@@ -44,7 +44,7 @@ function init(){
     // Start matching on word input
     wordInput.addEventListener('input', startMatch);
     
-    const uri = "https://api.datamuse.com/words?ml=ringing+in+the+ears&max=1000";
+    const uri = "https://cors.io/?https://api.datamuse.com/words?ml=ringing+in+the+ears&max=1000";
     // let headers = new Headers();
         // h.append("Access-Control-Allow-Origin: ", "*");
 
