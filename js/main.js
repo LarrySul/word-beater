@@ -45,20 +45,13 @@ function init(){
     wordInput.addEventListener('input', startMatch);
     
     const uri = "https://api.datamuse.com/words?ml=ringing+in+the+ears&max=1000";
-    let h = new Headers({
-        'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-    });
-
-    let req = new Request (uri, {
-        method: 'GET',
-        headers: h,
-        credentials: 'same-origin',
-        mode: 'cors'
-    });
+    // let headers = new Headers();
+        // h.append("Access-Control-Allow-Origin: ", "*");
 
     // to call words api
-    fetch(req)
+    fetch(uri, {
+        method: "GET",
+    })
     .then(response =>{
         return response.json();
     }).then(res =>{
